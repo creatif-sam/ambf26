@@ -10,20 +10,34 @@ export default function Navbar({ sections = [], eventStartISO, eventEndISO, onNa
     setMobileMenuOpen(false);
   };
 
+  const forumName = "AfricaMed Forum";
+  const isAfricamed = forumName.toLowerCase().includes("africamed");
+
   return (
     <nav className="fixed w-full top-0 z-50 bg-gradient-to-r from-slate-900/95 to-amber-900/95 backdrop-blur-sm border-b border-amber-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Logo */}
+          
+          {/* Logo Section */}
           <button
             aria-label="Go to home"
             onClick={() => handleNav("home")}
             className="flex items-center space-x-3 focus:outline-none"
           >
-            <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center font-bold text-slate-900">
-              A
-            </div>
-            <span className="text-xl font-bold hidden sm:block">AfricaMed Forum</span>
+            {isAfricamed ? (
+              <img
+                src="/ambf-logo.png"
+                alt="Africamed Forum Logo"
+                className="w-36 h-auto object-contain"
+              />
+            ) : (
+              <>
+                <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center font-bold text-slate-900">
+                  A
+                </div>
+                <span className="text-xl font-bold hidden sm:block">{forumName}</span>
+              </>
+            )}
           </button>
 
           {/* Desktop Links */}

@@ -160,12 +160,12 @@ function Footer() {
           <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center font-bold text-slate-900">
             <Trophy size={22} />
           </div>
-          <span className="text-xl font-bold">Africa Business Forum</span>
+          <span className="text-xl font-bold">Africamed Business Forum</span>
         </div>
         <p className="text-slate-400 mb-6">
           Building Africa’s Sports Economy — from 0.5% to 5% of Continental GDP
         </p>
-        <p className="text-sm text-slate-500">© 2026 Africa Sports Business Forum. All rights reserved.</p>
+        <p className="text-sm text-slate-500">© 2026 Africamed Business Forum. All rights reserved.</p>
       </div>
     </footer>
   );
@@ -320,7 +320,7 @@ export default function AfricaSportsForumWebsite() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             {[
-              { stat: "600+", label: "Attendees" },
+              { stat: "200+", label: "Attendees" },
               { stat: "30+", label: "Speakers & Athletes" },
               { stat: "80+", label: "Organizations" },
               { stat: "20+", label: "Countries" },
