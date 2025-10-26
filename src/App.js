@@ -160,7 +160,7 @@ function Footer() {
           <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center font-bold text-slate-900">
             <Trophy size={22} />
           </div>
-          <span className="text-xl font-bold">Africa Sports Business Forum</span>
+          <span className="text-xl font-bold">Africa Business Forum</span>
         </div>
         <p className="text-slate-400 mb-6">
           Building Africa’s Sports Economy — from 0.5% to 5% of Continental GDP

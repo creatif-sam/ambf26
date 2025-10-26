@@ -2,12 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* optional: smoother text */
+/* Optional: smoother text */
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Global body style */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -15,9 +16,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Tailwind utilities with @apply */
+  @apply bg-cover bg-center bg-no-repeat;
+
+  /* Actual background image */
+  background-image: url("/src/assets/stadium.png");
+  background-attachment: fixed; /* parallax-style effect */
 }
 
+/* Optional code font */
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
