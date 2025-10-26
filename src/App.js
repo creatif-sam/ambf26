@@ -44,7 +44,6 @@ export default function AfricaSportsForumWebsite() {
         onSecondary={() => scrollTo("about")}
       />
 
-  /* replace your current Event Details section with this */
 <section aria-labelledby="details" className="py-16 px-4">
   <div className="max-w-7xl mx-auto">
     <h2 id="details" className="sr-only">Event details</h2>
