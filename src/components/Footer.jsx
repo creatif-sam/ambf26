@@ -13,9 +13,9 @@ export default function Footer() {
           <span className="text-xl font-bold">Africamed Business Forum</span>
         </div>
         <p className="text-slate-400 mb-6">
-          Building Africas sports economy, from zero point five percent to five percent of continental GDP
+          Building Africas sports economy, from 0.5% to 5% of continental GDP
         </p>
-        <p className="text-sm text-slate-500">Copyright two thousand twenty six Africamed Business Forum. All rights reserved.</p>
+        <p className="text-sm text-slate-500">Copyright 2025 Africamed Business Forum. All rights reserved.</p>
       </div>
     </footer>
   );

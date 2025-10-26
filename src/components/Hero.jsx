@@ -149,9 +149,8 @@ export default function Header({ eventStartISO, eventEndISO, onPrimary, onSecond
       <div className="absolute inset-0 bg-black/60" />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* MOBILE-CENTERED / DESKTOP-LEFT TEXT */}
-          <div className="text-center md:text-left flex flex-col items-center md:items-start">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div>
             <h1 className="text-5xl md:text-6xl font-bold mb-3 leading-tight text-white">
               AfricaMed <span className="text-amber-400">Business</span>{" "}
               <span className="text-yellow-300">Forum</span>
@@ -159,19 +158,18 @@ export default function Header({ eventStartISO, eventEndISO, onPrimary, onSecond
             <p className="text-sm tracking-widest text-slate-300 mb-4">3RD EDITION • 2026</p>
 
             <div className="mb-6">
-              <p className="text-sm font-extrabold uppercase text-amber-300 mb-1">Theme</p>
+              <p className="text-amber-300 font-extrabold uppercase text-sm">Theme</p>
               <h2 className="text-2xl md:text-3xl font-bold text-white">
                 The African <span className="text-yellow-300">Sports Industry</span>
               </h2>
             </div>
 
-            {/* Counter box — fixed for large screens */}
-            <div className="bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-400/50 rounded-xl p-6 mb-6 text-white md:self-start">
+            <div className="bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-400/50 rounded-xl p-6 mb-6 text-white">
               {status === "upcoming" && (
                 <>
                   <p className="text-sm font-semibold text-amber-300 mb-3 uppercase">Event Starts In</p>
                   <div className="grid grid-cols-4 gap-3">
-                    {[
+                    {[ 
                       { v: countdown.days, t: "DAYS", c: "text-amber-400" },
                       { v: countdown.hours, t: "HOURS", c: "text-yellow-300" },
                       { v: countdown.minutes, t: "MINS", c: "text-amber-400" },
@@ -186,7 +184,7 @@ export default function Header({ eventStartISO, eventEndISO, onPrimary, onSecond
                 </>
               )}
               {status === "live" && (
-                <div className="flex items-center justify-center md:justify-start gap-3 text-green-400 font-semibold">
+                <div className="flex items-center gap-3 text-green-400 font-semibold">
                   <span className="inline-flex h-2 w-2 rounded-full bg-green-400 animate-pulse" />
                   Live now • {fmt.format(eventStart)} to {fmt.format(eventEnd)} (Africa/Casablanca)
                 </div>
@@ -196,25 +194,24 @@ export default function Header({ eventStartISO, eventEndISO, onPrimary, onSecond
               )}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+            <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={onPrimary}
-                className="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-4 px-8 rounded-lg transition transform hover:scale-105 flex items-center justify-center w-full sm:w-auto"
+                className="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-4 px-8 rounded-lg transition transform hover:scale-105 flex items-center justify-center"
               >
                 Register Now
                 <ArrowRight className="ml-2" size={20} />
               </button>
               <button
                 onClick={onSecondary}
-                className="border-2 border-amber-400 hover:bg-amber-400/10 text-white font-bold py-4 px-8 rounded-lg transition w-full sm:w-auto"
+                className="border-2 border-amber-400 hover:bg-amber-400/10 text-white font-bold py-4 px-8 rounded-lg transition"
               >
                 Learn More
               </button>
             </div>
           </div>
 
-          {/* SHOW ANIMATION ON MOBILE TOO (CENTERED BELOW TEXT) */}
-          <div className="block md:block relative mt-8 md:mt-0 w-full max-w-md md:max-w-none mx-auto md:mx-0">
+          <div className="hidden md:block relative">
             <AnimatedPanel />
           </div>
         </div>
