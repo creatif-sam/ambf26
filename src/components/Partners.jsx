@@ -9,6 +9,7 @@ export default function Partners() {
     "2.png",
     "3.png",
     "4.png",
+    "5.png",
     "akm.png",
     "diapason.png",
     "fagace.png",
@@ -17,8 +18,6 @@ export default function Partners() {
     "green-wave.png",
     "jaquar.png",
     "kardev.png",
-    "mdjs.png",
-    "mdsj.png",
     "pernova.png",
     "trivog.png",
     "whd.png"
