@@ -1,30 +1,68 @@
-.partners-container {
+/* partners animation and layout */
+.partnersContainer {
   overflow: hidden;
   position: relative;
 }
 
-.partners-track {
+/* track holds two groups side by side */
+.partnersTrack {
   display: flex;
   align-items: center;
-  gap: 3rem;
-  animation: scroll 35s linear infinite;
+  gap: 2rem;        /* spacing between groups */
+  will-change: transform;
+  /* ensure the track never wraps */
+  flex-wrap: nowrap;
 }
 
-.partners-container:hover .partners-track {
-  animation-play-state: paused;
+/* each group contains one full set of logos */
+.partnersGroup {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  /* crucial: treat group as one non shrinking block so translateX(-100%) equals exactly one group width */
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
-.partners-logo {
+/* each logo is prevented from shrinking or stretching */
+.partnersLogo {
+  flex: 0 0 auto;   /* do not shrink or grow */
   height: 70px;
   object-fit: contain;
   display: block;
+  margin: 0;
+  /* optional visual safety so light logos do not visually overlap adjacent items */
+  background: transparent; /* change to white if you want cards behind logos */
+  padding: 0.25rem;
+  border-radius: 6px;
 }
 
-@keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+/* animation starts when partnersAnimate is added to track */
+.partnersAnimate {
+  animation-name: partnersScroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 40s;
+}
+
+.partnersContainer:hover .partnersAnimate {
+  animation-play-state: paused;
+}
+
+/* move exactly one full group width left */
+@keyframes partnersScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+/* respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .partnersAnimate { animation: none; }
+}
+
+/* debugging helper: remove or comment out after testing
+   If some global rule is interfering this will add a thin outline
+   around each logo so you can see actual layout bounds */
+.partnersLogoDebug {
+  outline: 1px solid rgba(255,255,255,0.08);
 }
