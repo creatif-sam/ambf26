@@ -1,20 +1,55 @@
 // src/components/Partners.jsx
 import React from "react";
+import "../styles/partners.css";
 
 export default function Partners() {
+  const logos = [
+    "1.png",
+    "2.png",
+    "3.png",
+    "4.png",
+    "akm.png",
+    "diapason.png",
+    "fagace.png",
+    "foodshow.png",
+    "force-emploi.png",
+    "green-wave.png",
+    "jaquar.png",
+    "kardev.png",
+    "mdjs.png",
+    "mdsj.png",
+    "pernova.png",
+    "trivog.png",
+    "whd.png"
+  ];
+
   return (
     <section className="py-20 px-4 bg-slate-800/50">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold mb-10 text-center">Partners and supporters</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-60">
-          {[1, 2, 3, 4].map((i) => (
-            <div
-              key={i}
-              className="w-32 h-32 bg-gradient-to-br from-amber-500/10 to-slate-700/30 rounded-lg border border-amber-500/20 flex items-center justify-center"
-            >
-              <span className="text-slate-500 text-sm">Logo {i}</span>
-            </div>
-          ))}
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-4xl font-bold mb-10 text-center text-white">
+          They trusted us
+        </h2>
+
+        <div className="partners-container">
+          <div className="partners-track">
+            {logos.map((file, index) => (
+              <img
+                key={index}
+                src={`/partners/${file}`}
+                alt="Partner logo"
+                className="partners-logo"
+              />
+            ))}
+
+            {logos.map((file, index) => (
+              <img
+                key={index + logos.length}
+                src={`/partners/${file}`}
+                alt="Partner logo duplicate"
+                className="partners-logo"
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
