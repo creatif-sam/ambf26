@@ -66,3 +66,15 @@
 .partnersLogoDebug {
   outline: 1px solid rgba(255,255,255,0.08);
 }
+
+
+.partnersLink {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+.partnersLink:hover .partnersLogo {
+  transform: scale(1.05);
+  transition: transform 0.25s ease;
+}

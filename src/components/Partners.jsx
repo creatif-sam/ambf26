@@ -3,42 +3,37 @@ import React, { useState, useEffect, useRef } from "react";
 import "../styles/partners.css";
 
 export default function Partners() {
-  // list the filenames placed in public/partners
+  // list partner logos with URLs
   const logos = [
-    "1.png",
-    "2.png",
-    "3.png",
-    "4.png",
-    "5.png",
-    "akm.png",
-    "diapason.png",
-    "fagace.png",
-    "foodshow.png",
-    "force-emploi.png",
-    "green-wave.png",
-    "jaquar.png",
-    "kardev.png",
-    "pernova.png",
-    "trivog.png",
-    "whd.png"
+    { file: "1.png", url: "https://www.badea.org" },
+    { file: "2.png", url: "https://www.nepad.org" },
+    { file: "3.png", url: "https://mdjs.ma" },
+    { file: "4.png", url: "https://www.ascame.org/" },
+    { file: "5.png", url: "https://www.pacci.org/" },
+    { file: "akm.png", url: "https://akmtechnologies.com" },
+    { file: "diapason.png", url: "https://diapason360.com" },
+    { file: "fagace.png", url: "https://fagace.org" },
+    { file: "foodshow.png", url: "https://foodshow.ma" },
+    { file: "force-emploi.png", url: "https://www.forcemploi.ma/" },
+    { file: "green-wave.png", url: "https://greenwave.com" },
+    { file: "jaquar.png", url: "https://jaquar.com" },
+    { file: "kardev.png", url: "https://kardev.ma" },
+    { file: "pernova.png", url: "https://pernova.com" },
+    { file: "trivog.png", url: "https://trivog.com" },
+    { file: "whd.png", url: "https://whdagency.com" }
   ];
 
   const [loadedCount, setLoadedCount] = useState(0);
   const trackRef = useRef(null);
 
-  // when all logos have loaded add the animation class
   useEffect(() => {
     if (loadedCount === logos.length && trackRef.current) {
-      // force reflow to ensure correct measurement
-      // then add class that starts animation
-      // using requestAnimationFrame gives browser one paint with images
       requestAnimationFrame(() => {
         trackRef.current.classList.add("partnersAnimate");
       });
     }
   }, [loadedCount, logos.length]);
 
-  // increment load counter when each img fires onLoad or onError
   function handleImageLoad() {
     setLoadedCount((c) => c + 1);
   }
@@ -52,32 +47,50 @@ export default function Partners() {
 
         <div className="partnersContainer rounded-lg">
           <div ref={trackRef} className="partnersTrack">
+
             {/* first group */}
             <div className="partnersGroup">
-              {logos.map((file, i) => (
-                <img
-                  key={file}
-                  src={`/partners/${file}`}
-                  alt={`Partner logo ${i + 1}`}
-                  className="partnersLogo"
-                  onLoad={handleImageLoad}
-                  onError={handleImageLoad}
-                />
+              {logos.map((item, i) => (
+                <a
+                  key={item.file}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="partnersLink"
+                >
+                  <img
+                    src={`/partners/${item.file}`}
+                    alt={`Partner logo ${i + 1}`}
+                    className="partnersLogo"
+                    onLoad={handleImageLoad}
+                    onError={handleImageLoad}
+                    draggable="false"
+                  />
+                </a>
               ))}
             </div>
 
-            {/* duplicate group for seamless loop */}
+            {/* duplicate group for seamless infinite scroll */}
             <div aria-hidden="true" className="partnersGroup">
-              {logos.map((file, i) => (
-                <img
-                  key={"dup" + file}
-                  src={`/partners/${file}`}
-                  alt=""
-                  className="partnersLogo"
+              {logos.map((item) => (
+                <a
+                  key={"dup-" + item.file}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="partnersLink"
                   draggable="false"
-                />
+                >
+                  <img
+                    src={`/partners/${item.file}`}
+                    alt=""
+                    className="partnersLogo"
+                    draggable="false"
+                  />
+                </a>
               ))}
             </div>
+
           </div>
         </div>
       </div>
