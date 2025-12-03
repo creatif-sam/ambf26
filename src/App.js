@@ -10,6 +10,7 @@ import Stats from "./components/Stats";
 import RegistrationForm from "./components/RegistrationForm";
 import Partners from "./components/Partners";
 import Footer from "./components/Footer";
+import AboutUs from "./components/AboutUs";
 
 export default function AfricaSportsForumWebsite() {
   const eventStartISO = "2026-01-16T08:30:00+01:00";
@@ -87,6 +88,7 @@ export default function AfricaSportsForumWebsite() {
 </section>
 
 
+      <AboutUs />
       <FocusAreas />
       <ProgramHighlights />
       <Stats />
