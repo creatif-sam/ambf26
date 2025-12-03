@@ -20,6 +20,7 @@ export default function AfricaSportsForumWebsite() {
     { id: "about", label: "About" },
     { id: "program", label: "Program" },
     { id: "register", label: "Register" },
+     { id: "club", label: "Africamed Club" },
   ];
 
   const scrollTo = (id) => {

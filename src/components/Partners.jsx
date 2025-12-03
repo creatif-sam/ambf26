@@ -10,16 +10,16 @@ export default function Partners() {
     { file: "3.png", url: "https://mdjs.ma" },
     { file: "4.png", url: "https://www.ascame.org/" },
     { file: "5.png", url: "https://www.pacci.org/" },
-    { file: "akm.png", url: "https://akmtechnologies.com" },
+    { file: "akm.png", url: "https://akm-technologies.fr" },
     { file: "diapason.png", url: "https://diapason360.com" },
     { file: "fagace.png", url: "https://fagace.org" },
     { file: "foodshow.png", url: "https://foodshow.ma" },
     { file: "force-emploi.png", url: "https://www.forcemploi.ma/" },
-    { file: "green-wave.png", url: "https://greenwave.com" },
-    { file: "jaquar.png", url: "https://jaquar.com" },
+    { file: "green-wave.png", url: "https://www.greenwave.ma/" },
+    { file: "jaquar.png", url: "https://jaquarworld.ma/" },
     { file: "kardev.png", url: "https://kardev.ma" },
     { file: "pernova.png", url: "https://pernova.com" },
-    { file: "trivog.png", url: "https://trivog.com" },
+    { file: "trivog.png", url: "https://trivog.ma/" },
     { file: "whd.png", url: "https://whdagency.com" }
   ];
 
