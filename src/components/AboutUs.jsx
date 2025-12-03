@@ -69,8 +69,8 @@ export default function AboutStructured({ className = "" }) {
     flexBasis: isMobile ? "100%" : "28%",
     display: "flex",
     flexDirection: "column",
-    alignItems: isMobile ? "flex-start" : "flex-start",
-    textAlign: isMobile ? "left" : "left",
+    alignItems: isMobile ? "center" : "flex-start",
+    textAlign: isMobile ? "center" : "left",
     paddingBottom: isMobile ? 12 : 0
   };
 
@@ -90,10 +90,10 @@ export default function AboutStructured({ className = "" }) {
 
   const railStyle = {
     position: "absolute",
-    left: isMobile ? 24 : 28,
+    left: 28,
     top: 8,
     bottom: 8,
-    width: isMobile ? 6 : 10,
+    width: 10,
     borderRadius: 8,
     backgroundColor: "rgba(161,98,5,0.85)"
   };
@@ -101,8 +101,8 @@ export default function AboutStructured({ className = "" }) {
   const anchorBaseStyle = {
     position: "absolute",
     transform: "translateY(-50%)",
-    width: isMobile ? 30 : 34,
-    height: isMobile ? 30 : 34,
+    width: 34,
+    height: 34,
     borderRadius: "50%",
     backgroundColor: "#f6c365",
     border: "3px solid #000000",
@@ -191,30 +191,32 @@ export default function AboutStructured({ className = "" }) {
             <span style={{ display: "block" }}>Us</span>
           </h2>
 
-          <div style={timelineWrapStyle}>
-            <div style={railStyle} />
+          {!isMobile && (
+            <div style={timelineWrapStyle}>
+              <div style={railStyle} />
 
-            {anchorPositions.map((pos, idx) => {
-              const topPercent = `${pos * 100}%`;
-              const anchorStyle = {
-                ...anchorBaseStyle,
-                top: topPercent,
-                left: isMobile ? 12 : 12
-              };
-              return (
-                <div key={idx} style={anchorStyle}>
-                  <div
-                    style={{
-                      width: isMobile ? 14 : 18,
-                      height: isMobile ? 14 : 18,
-                      borderRadius: "50%",
-                      backgroundColor: "transparent"
-                    }}
-                  />
-                </div>
-              );
-            })}
-          </div>
+              {anchorPositions.map((pos, idx) => {
+                const topPercent = `${pos * 100}%`;
+                const anchorStyle = {
+                  ...anchorBaseStyle,
+                  top: topPercent,
+                  left: 12
+                };
+                return (
+                  <div key={idx} style={anchorStyle}>
+                    <div
+                      style={{
+                        width: 18,
+                        height: 18,
+                        borderRadius: "50%",
+                        backgroundColor: "transparent"
+                      }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         <div style={rightColStyle}>
