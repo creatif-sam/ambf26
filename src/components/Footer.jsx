@@ -28,7 +28,7 @@ export default function Footer() {
             </div>
 
             <p className="text-slate-300 max-w-xs text-center lg:text-left mb-6">
-              Building Africas sports economy from 0.5 percent to 5 percent of continental GDP
+              Building Africa's sports economy from 0.5 percent to 5 percent of continental GDP
             </p>
 
             <div className="flex gap-3">
