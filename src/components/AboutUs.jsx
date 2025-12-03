@@ -78,7 +78,9 @@ export default function AboutStructured({ className = "" }) {
     fontWeight: 800,
     fontSize: isMobile ? 32 : 40,
     lineHeight: 1.05,
-    marginBottom: isMobile ? 6 : 8
+    marginBottom: isMobile ? 10 : 8,
+    textAlign: isMobile ? "center" : "left",
+    width: "100%"
   };
 
   const timelineWrapStyle = {
@@ -187,8 +189,12 @@ export default function AboutStructured({ className = "" }) {
       <div style={containerStyle}>
         <div style={leftColStyle}>
           <h2 style={titleStyle}>
-            <span style={{ display: "block" }}>About</span>
-            <span style={{ display: "block" }}>Us</span>
+            {isMobile ? "About Us" : (
+              <>
+                <span style={{ display: "block" }}>About</span>
+                <span style={{ display: "block" }}>Us</span>
+              </>
+            )}
           </h2>
 
           {!isMobile && (
