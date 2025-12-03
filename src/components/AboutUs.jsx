@@ -69,8 +69,8 @@ export default function AboutStructured({ className = "" }) {
     flexBasis: isMobile ? "100%" : "28%",
     display: "flex",
     flexDirection: "column",
-    alignItems: isMobile ? "center" : "flex-start",
-    textAlign: isMobile ? "center" : "left",
+    alignItems: isMobile ? "flex-start" : "flex-start",
+    textAlign: isMobile ? "left" : "left",
     paddingBottom: isMobile ? 12 : 0
   };
 
@@ -85,15 +85,12 @@ export default function AboutStructured({ className = "" }) {
     position: "relative",
     width: "100%",
     height: isMobile ? 240 : 360,
-    marginTop: 6,
-    display: "flex",
-    justifyContent: isMobile ? "center" : "flex-start"
+    marginTop: 6
   };
 
   const railStyle = {
     position: "absolute",
-    left: isMobile ? "50%" : 28,
-    transform: isMobile ? "translateX(-50%)" : undefined,
+    left: isMobile ? 24 : 28,
     top: 8,
     bottom: 8,
     width: isMobile ? 6 : 10,
@@ -103,7 +100,7 @@ export default function AboutStructured({ className = "" }) {
 
   const anchorBaseStyle = {
     position: "absolute",
-    transform: isMobile ? "translate(-50%, -50%)" : "translateY(-50%)",
+    transform: "translateY(-50%)",
     width: isMobile ? 30 : 34,
     height: isMobile ? 30 : 34,
     borderRadius: "50%",
@@ -171,14 +168,18 @@ export default function AboutStructured({ className = "" }) {
   const summaryStyle = {
     color: "rgba(203,213,225,1)",
     fontSize: isMobile ? 15 : 14,
-    lineHeight: 1.6
+    lineHeight: 1.6,
+    textAlign: "justify",
+    textJustify: "inter-word"
   };
 
   const bottomTextStyle = {
     marginTop: 12,
     color: "rgba(203,213,225,1)",
     fontSize: isMobile ? 15 : 14,
-    lineHeight: 1.6
+    lineHeight: 1.6,
+    textAlign: "justify",
+    textJustify: "inter-word"
   };
 
   return (
@@ -198,7 +199,7 @@ export default function AboutStructured({ className = "" }) {
               const anchorStyle = {
                 ...anchorBaseStyle,
                 top: topPercent,
-                left: isMobile ? "50%" : 12
+                left: isMobile ? 12 : 12
               };
               return (
                 <div key={idx} style={anchorStyle}>
