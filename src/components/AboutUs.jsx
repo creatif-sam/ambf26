@@ -66,13 +66,16 @@ export default function AboutStructured({ className = "" }) {
   };
 
   const leftColStyle = {
-    flexBasis: isMobile ? "100%" : "28%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: isMobile ? "center" : "flex-start",
-    textAlign: isMobile ? "center" : "left",
-    paddingBottom: isMobile ? 12 : 0
-  };
+  flexBasis: isMobile ? "100%" : "28%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: isMobile ? "center" : "flex-start",
+  justifyContent: "center",
+  textAlign: isMobile ? "center" : "left",
+  width: "100%",
+  paddingBottom: isMobile ? 12 : 0
+};
+
 
   const titleStyle = {
     fontWeight: 800,
