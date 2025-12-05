@@ -117,7 +117,7 @@ export default function Footer() {
 
               <div className="bg-white/10 p-4 rounded-md mb-6">
                 <p className="text-sm">Email</p>
-                <a href="mailto:info@africamedforum.com" className="block text-slate-100 mb-2">info@africamedforum.com</a>
+                <a href="mailto:info@africamedforum.com" className="block text-slate-100 mb-2">contact@africamedforum.com</a>
                 <p className="text-sm">Phone</p>
                 <a href="tel:+1234567890" className="block text-slate-100">+ 212 655-401739</a>
               </div>
