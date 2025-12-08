@@ -11,7 +11,7 @@ export default function Partners() {
     { file: "4.png", url: "https://www.ascame.org/" },
     { file: "5.png", url: "https://www.pacci.org/" },
     { file: "akm.png", url: "https://akm-technologies.fr" },
-    { file: "diapason.png", url: "https://diapason360.com" },
+    { file: "diapason.png", url: "/" },
     { file: "fagace.png", url: "https://fagace.org" },
     { file: "foodshow.png", url: "https://foodshow.ma" },
     { file: "force-emploi.png", url: "https://www.forcemploi.ma/" },
