@@ -10,6 +10,7 @@ export default function Partners() {
     { file: "3.png", url: "https://mdjs.ma" },
     { file: "4.png", url: "https://www.ascame.org/" },
     { file: "5.png", url: "https://www.pacci.org/" },
+      { file: "afri-dip.png", url: "https://afrique-diplomatique.com/" },
     { file: "akm.png", url: "https://akm-technologies.fr" },
     { file: "diapason.png", url: "/" },
     { file: "fagace.png", url: "https://fagace.org" },
