@@ -11,6 +11,10 @@ import RegistrationForm from "./components/RegistrationForm";
 import Partners from "./components/Partners";
 import Footer from "./components/Footer";
 import AboutUs from "./components/AboutUs";
+import ClubAfricamed from "./pages/ClubAfricamed";
+
+
+
 
 export default function AfricaSportsForumWebsite() {
   const eventStartISO = "2026-01-16T08:30:00+01:00";
@@ -21,7 +25,7 @@ export default function AfricaSportsForumWebsite() {
     { id: "about", label: "About" },
     { id: "program", label: "Program" },
     { id: "register", label: "Register" },
-     { id: "club", label: "Club Africamed" },
+    { id: "club", label: "Club Africamed" },
   ];
 
   const scrollTo = (id) => {
@@ -101,6 +105,7 @@ export default function AfricaSportsForumWebsite() {
           </p>
           <RegistrationForm />
         </div>
+      
       </section>
 
       <Partners />

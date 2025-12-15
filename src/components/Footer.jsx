@@ -58,6 +58,26 @@ export default function Footer() {
                 </svg>
               </a>
 
+
+              <a
+  href="https://www.instagram.com/africamed_business_forum/"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Instagram"
+  className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
+>
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden
+  >
+    <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.65 0 3 1.35 3 3v10c0 1.65-1.35 3-3 3H7c-1.65 0-3-1.35-3-3V7c0-1.65 1.35-3 3-3h10zm-5 3.5A4.5 4.5 0 1 0 16.5 12 4.51 4.51 0 0 0 12 7.5zm0 7.4A2.9 2.9 0 1 1 14.9 12 2.9 2.9 0 0 1 12 14.9zm4.75-7.9a1.05 1.05 0 1 1-1.05-1.05 1.05 1.05 0 0 1 1.05 1.05z" />
+  </svg>
+</a>
+
+
               <a
                 href="https://www.youtube.com/watch?v=UR1xJPOJU0Y"
                 target="_blank"
@@ -71,16 +91,23 @@ export default function Footer() {
               </a>
 
               <a
-                href="https://twitter.com/YourProfile"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                  <path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.27 4.27 0 001.88-2.37 8.55 8.55 0 01-2.71 1.03 4.26 4.26 0 00-7.27 3.89A12.09 12.09 0 013 5.6a4.26 4.26 0 001.32 5.69c-.66 0-1.28-.2-1.82-.5v.05a4.26 4.26 0 003.42 4.18c-.56.15-1.14.18-1.74.07a4.27 4.27 0 003.98 2.96A8.54 8.54 0 012 19.54a12.06 12.06 0 006.53 1.92c7.84 0 12.12-6.5 12.12-12.12 0-.18 0-.36-.01-.54A8.66 8.66 0 0022.46 6z"/>
-                </svg>
-              </a>
+  href="https://x.com/AfricaMedForum"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="X"
+  className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
+>
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden
+  >
+    <path d="M18.244 2H21.61l-7.357 8.404L22.9 22h-6.84l-5.36-6.973L4.61 22H1.24l7.87-9.002L1.1 2h6.98l4.84 6.302L18.244 2z" />
+  </svg>
+</a>
+
             </div>
           </div>
 
