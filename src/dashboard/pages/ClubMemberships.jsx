@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
-import { supabase } from "../lib/supabase"
+import { supabase } from "../../lib/supabase";
+
 import { useNavigate } from "react-router-dom"
 
 export default function AdminDashboard() {
@@ -26,10 +27,10 @@ export default function AdminDashboard() {
     setApplications(data || [])
   }
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut()
-    navigate("/admin-login")
-  }
+//   const handleLogout = async () => {
+//     await supabase.auth.signOut()
+//     navigate("/admin-login")
+//   }
 
   const filteredApplications = useMemo(() => {
     return applications.filter((app) => {
@@ -106,25 +107,13 @@ export default function AdminDashboard() {
       {/* Top bar */}
       <header className="bg-white border-b px-8 py-4 flex justify-between items-center">
         <div>
-          <h1 className="text-xl font-bold">
-            AfricaMed Admin Dashboard
-          </h1>
+        
           <p className="text-sm text-gray-500">
             Membership applications
           </p>
         </div>
 
-        <div className="flex items-center gap-4">
-          <span className="text-sm text-gray-600">
-            {adminEmail}
-          </span>
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 rounded-md bg-slate-900 text-white text-sm font-semibold"
-          >
-            Logout
-          </button>
-        </div>
+        
       </header>
 
       {/* Controls */}
