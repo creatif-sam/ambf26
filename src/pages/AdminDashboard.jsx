@@ -57,6 +57,7 @@ export default function AdminDashboard() {
       "Organization",
       "Role",
       "Motivation",
+      "Admin Notes",
       "Submitted At"
     ]
 
@@ -68,17 +69,18 @@ export default function AdminDashboard() {
       a.organization || "",
       a.role || "",
       a.reason || "",
+      a.admin_notes || "",
       new Date(a.created_at).toISOString()
     ])
 
-    const csvContent =
+    const csv =
       [headers, ...rows]
-        .map((e) =>
-          e.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(",")
+        .map((row) =>
+          row.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(",")
         )
         .join("\n")
 
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" })
     const url = URL.createObjectURL(blob)
     const link = document.createElement("a")
     link.href = url
@@ -88,9 +90,20 @@ export default function AdminDashboard() {
     document.body.removeChild(link)
   }
 
+  const saveNotes = async () => {
+    if (!selected) return
+
+    await supabase
+      .from("africamed_club_applications")
+      .update({ admin_notes: selected.admin_notes })
+      .eq("id", selected.id)
+
+    fetchApplications()
+  }
+
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
-      {/* Top Bar */}
+      {/* Top bar */}
       <header className="bg-white border-b px-8 py-4 flex justify-between items-center">
         <div>
           <h1 className="text-xl font-bold">
@@ -145,7 +158,7 @@ export default function AdminDashboard() {
         </button>
       </div>
 
-      {/* Main Content */}
+      {/* Main content */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-8">
         {/* List */}
         <section className="lg:col-span-2 bg-white rounded-xl shadow-sm overflow-hidden">
@@ -178,10 +191,7 @@ export default function AdminDashboard() {
 
               {filteredApplications.length === 0 && (
                 <tr>
-                  <td
-                    colSpan={4}
-                    className="p-6 text-center text-gray-500"
-                  >
+                  <td colSpan={4} className="p-6 text-center text-gray-500">
                     No applications found
                   </td>
                 </tr>
@@ -213,6 +223,31 @@ export default function AdminDashboard() {
                 label="Submitted on"
                 value={new Date(selected.created_at).toLocaleString()}
               />
+
+              <div className="pt-4">
+                <label className="text-xs uppercase tracking-wide text-gray-500">
+                  Admin notes
+                </label>
+
+                <textarea
+                  className="w-full mt-1 border rounded-md p-2 text-sm"
+                  rows={4}
+                  value={selected.admin_notes || ""}
+                  onChange={(e) =>
+                    setSelected({
+                      ...selected,
+                      admin_notes: e.target.value
+                    })
+                  }
+                />
+
+                <button
+                  onClick={saveNotes}
+                  className="mt-2 px-4 py-2 bg-slate-900 text-white rounded-md text-sm"
+                >
+                  Save notes
+                </button>
+              </div>
             </div>
           )}
         </aside>
