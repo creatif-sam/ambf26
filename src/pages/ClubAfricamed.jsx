@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+  import { supabase } from "../lib/supabase"
 
 export default function AfricaMedClubPage() {
   const [form, setForm] = useState({
@@ -27,15 +28,40 @@ export default function AfricaMedClubPage() {
     return ""
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const err = validate()
-    if (err) {
-      setStatus({ submitted: false, error: err })
-      return
-    }
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  const err = validate()
+  if (err) {
+    setStatus({ submitted: false, error: err })
+    return
+  }
+
+  const { error } = await supabase
+    .from("africamed_club_applications")
+    .insert([
+      {
+        full_name: form.fullName,
+        email: form.email,
+        phone: form.phone,
+        country: form.country,
+        organization: form.organization,
+        role: form.role,
+        reason: form.reason
+      }
+    ])
+
+  if (error) {
+    setStatus({
+      submitted: false,
+      error: "Submission failed. Please try again later."
+    })
+  } else {
     setStatus({ submitted: true, error: "" })
   }
+}
+
 
   return (
     <div className="min-h-screen py-14 px-6 md:px-12 bg-white text-gray-900">
