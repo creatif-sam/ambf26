@@ -13,6 +13,9 @@ import Partners from "./components/Partners"
 import Footer from "./components/Footer"
 import AboutUs from "./pages/AboutUs"
 import ClubAfricamed from "./pages/ClubAfricamed"
+import AdminDashboard from "./pages/AdminDashboard"
+import AdminLogin from "./pages/AdminLogin"
+import AdminGuard from "./components/AdminGuard"
 
 function Home() {
   const eventStartISO = "2026-01-16T08:30:00+01:00"
@@ -108,6 +111,10 @@ export default function AfricaSportsForumWebsite() {
     <Route path="/" element={<Home />} />
     <Route path="/about" element={<AboutUs />} />
     <Route path="/club" element={<ClubAfricamed />} />
+    <Route path="/admin" element={<AdminGuard><AdminDashboard /></AdminGuard>} />
+    <Route path="/admin-login" element={<AdminLogin />} />
+
+
   </Routes>
 </main>
 
