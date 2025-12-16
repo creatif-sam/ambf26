@@ -11,7 +11,7 @@ import Stats from "./components/Stats"
 import RegistrationForm from "./components/RegistrationForm"
 import Partners from "./components/Partners"
 import Footer from "./components/Footer"
-import AboutUs from "./components/AboutUs"
+import AboutUs from "./pages/AboutUs"
 import ClubAfricamed from "./pages/ClubAfricamed"
 
 function Home() {
