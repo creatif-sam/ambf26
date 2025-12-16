@@ -1,7 +1,5 @@
 import React, { useState } from "react"
-import { supabase } from "../lib/supabase"
-
-const RECAPTCHA_SITE_KEY = "6LcTwy0sAAAAABkYUhgcCUpt0iqx08xEDf9w2a2K"
+import { supabase, supabaseAnonKey } from "../lib/supabase"
 
 export default function AfricaMedClubPage() {
   const [form, setForm] = useState({
@@ -24,6 +22,8 @@ export default function AfricaMedClubPage() {
     type: "info",
     message: ""
   })
+
+  
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -58,13 +58,6 @@ export default function AfricaMedClubPage() {
     }
 
     try {
-      // 1. Execute reCAPTCHA v3
-      const recaptchaToken = await window.grecaptcha.execute(
-        RECAPTCHA_SITE_KEY,
-        { action: "submit" }
-      )
-
-      // 2. Insert application
       const { error } = await supabase
         .from("africamed_club_applications")
         .insert([
@@ -75,8 +68,7 @@ export default function AfricaMedClubPage() {
             country: form.country,
             organization: form.organization,
             role: form.role,
-            reason: form.reason,
-            recaptcha_token: recaptchaToken
+            reason: form.reason
           }
         ])
 
@@ -96,25 +88,30 @@ export default function AfricaMedClubPage() {
         return
       }
 
-      // 3. Mark success immediately
       setStatus({ submitted: true })
       showToast("success", "Application submitted successfully.")
 
-      // 4. Fire and forget email notification
-      supabase.functions.invoke("send-application-email", {
-        body: {
-          full_name: form.fullName,
-          email: form.email,
-          country: form.country,
-          recaptcha_token: recaptchaToken
+      fetch(
+        "https://devjqoacvmqzgwoxoddo.supabase.co/functions/v1/send-application-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${supabaseAnonKey}`
+          },
+          body: JSON.stringify({
+            full_name: form.fullName,
+            email: form.email,
+            country: form.country
+          })
         }
+      ).catch(() => {
+        console.warn("Email notification failed")
       })
-
-    } catch (err) {
-      console.error(err)
+    } catch {
       showToast(
         "error",
-        "Security verification failed. Please try again."
+        "Unexpected error occurred. Please try again."
       )
     }
   }
