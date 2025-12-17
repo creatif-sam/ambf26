@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
-import { Pencil, Trash2 } from "lucide-react"
+import { ArrowUp, ArrowDown, Pencil, Trash2 } from "lucide-react";
+
 
 import {
   fetchSpeakers,
@@ -53,6 +54,22 @@ export default function Speakers() {
     const { data } = await fetchSpeakers()
     setSpeakers(data || [])
   }
+
+//Move speaker up or down in the list
+  async function moveSpeaker(speaker, direction) {
+  const newOrder =
+    direction === "up"
+      ? speaker.display_order - 1
+      : speaker.display_order + 1;
+
+  await updateSpeaker(speaker.id, {
+    display_order: newOrder
+  });
+
+  loadSpeakers();
+}
+
+
 
   /* ================= MODAL ================= */
   function openAdd() {
@@ -206,25 +223,40 @@ export default function Speakers() {
                   </span>
                 </td>
 
-                <td className="p-3 text-right">
-                  <div className="inline-flex items-center gap-3">
-                    <button
-                      onClick={() => openEdit(s)}
-                      title="Edit speaker"
-                      className="text-amber-600 hover:text-amber-700"
-                    >
-                      <Pencil size={18} />
-                    </button>
+<td className="p-3">
+  <div className="flex justify-end items-center gap-2">
+    <button
+      onClick={() => moveSpeaker(s, "up")}
+      className="text-gray-600"
+    >
+      <ArrowUp size={16} />
+    </button>
 
-                    <button
-                      onClick={() => handleDelete(s)}
-                      title="Delete speaker"
-                      className="text-red-600 hover:text-red-700"
-                    >
-                      <Trash2 size={18} />
-                    </button>
-                  </div>
-                </td>
+    <button
+      onClick={() => moveSpeaker(s, "down")}
+      className="text-gray-600"
+    >
+      <ArrowDown size={16} />
+    </button>
+
+    <button
+      onClick={() => openEdit(s)}
+      className="text-amber-600"
+    >
+      <Pencil size={16} />
+    </button>
+
+    <button
+      onClick={() => handleDelete(s)}
+      className="text-red-600"
+    >
+      <Trash2 size={16} />
+    </button>
+  </div>
+</td>
+
+
+
               </tr>
             ))}
 
