@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import FocusAreas from "./components/FocusAreas";
 import ProgramHighlights from "./components/ProgramHighlights";
+// import SpeakersSection from "./components/SpeakersSection" until speakers are ready
 import Stats from "./components/Stats";
 import RegistrationForm from "./components/RegistrationForm";
 import Partners from "./components/Partners";
@@ -58,6 +59,7 @@ function Home() {
 
       <FocusAreas />
       <ProgramHighlights />
+      {/* <SpeakersSection /> */}
       <Stats />
 
       <section id="register" className="py-20 px-4">
@@ -90,8 +92,10 @@ export default function AfricaSportsForumWebsite() {
     { id: "home", label: "Home" },
     { id: "about", label: "About" },
     { id: "program", label: "Program" },
+    { id: "speakers", label: "Speakers" },
     { id: "register", label: "Register" },
     { id: "club", label: "Club Africamed" },
+  
   ];
 
   return (

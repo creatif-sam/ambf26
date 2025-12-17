@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { Pencil, Trash2 } from "lucide-react";
+import { useEffect, useState } from "react"
+import toast from "react-hot-toast"
+import { Pencil, Trash2 } from "lucide-react"
 
 import {
   fetchSpeakers,
@@ -9,18 +9,19 @@ import {
   deleteSpeaker,
   uploadSpeakerPhoto,
   deleteSpeakerPhoto
-} from "../services/speakers.service";
+} from "../services/speakers.service"
 
 /*
   SPEAKERS ADMIN PAGE
-  -------------------
+  ------------------
   Features:
   - List speakers
-  - Speaker count
+  - Count total speakers
   - Add speaker (modal)
   - Edit speaker (modal)
-  - Delete speaker (with photo cleanup)
-  - Photo upload + preview
+  - Change status (draft / confirmed)
+  - Upload speaker photo
+  - Delete speaker + cleanup photo
 */
 
 const EMPTY_FORM = {
@@ -31,114 +32,122 @@ const EMPTY_FORM = {
   status: "draft",
   bio: "",
   photo_url: ""
-};
+}
 
 export default function Speakers() {
-  const [speakers, setSpeakers] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [editing, setEditing] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [speakers, setSpeakers] = useState([])
+  const [showModal, setShowModal] = useState(false)
+  const [editing, setEditing] = useState(null)
+  const [loading, setLoading] = useState(false)
 
-  const [form, setForm] = useState(EMPTY_FORM);
-  const [photoFile, setPhotoFile] = useState(null);
-  const [photoPreview, setPhotoPreview] = useState("");
+  const [form, setForm] = useState(EMPTY_FORM)
+  const [photoFile, setPhotoFile] = useState(null)
+  const [photoPreview, setPhotoPreview] = useState("")
 
+  /* ================= LOAD ================= */
   useEffect(() => {
-    loadSpeakers();
-  }, []);
+    loadSpeakers()
+  }, [])
 
   async function loadSpeakers() {
-    const { data } = await fetchSpeakers();
-    setSpeakers(data || []);
+    const { data } = await fetchSpeakers()
+    setSpeakers(data || [])
   }
 
+  /* ================= MODAL ================= */
   function openAdd() {
-    setEditing(null);
-    setForm(EMPTY_FORM);
-    setPhotoFile(null);
-    setPhotoPreview("");
-    setShowModal(true);
+    setEditing(null)
+    setForm(EMPTY_FORM)
+    setPhotoFile(null)
+    setPhotoPreview("")
+    setShowModal(true)
   }
 
   function openEdit(speaker) {
-    setEditing(speaker);
-    setForm({ ...speaker });
-    setPhotoPreview(speaker.photo_url || "");
-    setPhotoFile(null);
-    setShowModal(true);
+    setEditing(speaker)
+    setForm({ ...speaker })
+    setPhotoPreview(speaker.photo_url || "")
+    setPhotoFile(null)
+    setShowModal(true)
   }
 
   function closeModal() {
-    setShowModal(false);
-    setEditing(null);
-    setForm(EMPTY_FORM);
-    setPhotoFile(null);
-    setPhotoPreview("");
+    setShowModal(false)
+    setEditing(null)
+    setForm(EMPTY_FORM)
+    setPhotoFile(null)
+    setPhotoPreview("")
   }
 
+  /* ================= FORM ================= */
   function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value })
   }
 
   async function handleSubmit(e) {
-    e.preventDefault();
-    if (loading) return;
+    e.preventDefault()
+    if (loading) return
 
-    setLoading(true);
+    setLoading(true)
 
-    let photoUrl = form.photo_url;
+    let photoUrl = form.photo_url
 
+    // Upload new photo if selected
     if (photoFile) {
       try {
-        photoUrl = await uploadSpeakerPhoto(photoFile);
+        photoUrl = await uploadSpeakerPhoto(photoFile)
       } catch (err) {
-        toast.error(err.message || "Photo upload failed");
-        setLoading(false);
-        return;
+        toast.error(err.message || "Photo upload failed")
+        setLoading(false)
+        return
       }
     }
 
-    const payload = { ...form, photo_url: photoUrl };
+    const payload = { ...form, photo_url: photoUrl }
 
     const action = editing
       ? updateSpeaker(editing.id, payload)
-      : createSpeaker(payload);
+      : createSpeaker(payload)
 
-    const { error } = await action;
+    const { error } = await action
 
     if (error) {
-      toast.error(error.message);
-      setLoading(false);
-      return;
+      toast.error(error.message)
+      setLoading(false)
+      return
     }
 
-    toast.success(editing ? "Speaker updated" : "Speaker added");
-    closeModal();
-    loadSpeakers();
-    setLoading(false);
+    toast.success(editing ? "Speaker updated" : "Speaker added")
+    closeModal()
+    loadSpeakers()
+    setLoading(false)
   }
 
+  /* ================= DELETE ================= */
   async function handleDelete(speaker) {
-    if (!window.confirm("Delete this speaker permanently?")) return;
+    const ok = window.confirm("Delete this speaker permanently?")
+    if (!ok) return
 
+    // Cleanup photo from storage
     if (speaker.photo_url) {
       try {
-        await deleteSpeakerPhoto(speaker.photo_url);
+        await deleteSpeakerPhoto(speaker.photo_url)
       } catch (err) {
-        console.warn("Photo cleanup failed", err);
+        console.warn("Photo cleanup failed", err)
       }
     }
 
-    const { error } = await deleteSpeaker(speaker.id);
+    const { error } = await deleteSpeaker(speaker.id)
     if (error) {
-      toast.error(error.message);
-      return;
+      toast.error(error.message)
+      return
     }
 
-    toast.success("Speaker deleted");
-    loadSpeakers();
+    toast.success("Speaker deleted")
+    loadSpeakers()
   }
 
+  /* ================= UI ================= */
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -181,9 +190,22 @@ export default function Speakers() {
                     "—"
                   )}
                 </td>
+
                 <td className="p-3">{s.full_name}</td>
                 <td className="p-3">{s.speaking_type}</td>
-                <td className="p-3 capitalize">{s.status}</td>
+
+                <td className="p-3 capitalize">
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                      s.status === "confirmed"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-gray-200 text-gray-600"
+                    }`}
+                  >
+                    {s.status}
+                  </span>
+                </td>
+
                 <td className="p-3 text-right">
                   <div className="inline-flex items-center gap-3">
                     <button
@@ -217,7 +239,7 @@ export default function Speakers() {
         </table>
       </div>
 
-      {/* Modal */}
+      {/* ================= MODAL ================= */}
       {showModal && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
           <div className="bg-white rounded-xl p-6 w-full max-w-lg">
@@ -231,8 +253,8 @@ export default function Speakers() {
                 value={form.full_name}
                 onChange={handleChange}
                 placeholder="Full name"
-                className="w-full border rounded-md px-3 py-2 text-slate-900"
                 required
+                className="w-full border rounded-md px-3 py-2 text-slate-900"
               />
 
               <input
@@ -257,10 +279,21 @@ export default function Speakers() {
                 onChange={handleChange}
                 className="w-full border rounded-md px-3 py-2 text-slate-900"
               >
-                <option>Keynote</option>
-                <option>Panelist</option>
-                <option>Moderator</option>
-                <option>Workshop</option>
+                <option value="Keynote">Keynote</option>
+                <option value="Panelist">Panelist</option>
+                <option value="Moderator">Moderator</option>
+                <option value="Workshop">Workshop</option>
+              </select>
+
+              {/* ✅ STATUS SELECT */}
+              <select
+                name="status"
+                value={form.status}
+                onChange={handleChange}
+                className="w-full border rounded-md px-3 py-2 text-slate-900"
+              >
+                <option value="draft">Draft (hidden)</option>
+                <option value="confirmed">Confirmed (public)</option>
               </select>
 
               <textarea
@@ -276,8 +309,8 @@ export default function Speakers() {
                 type="file"
                 accept="image/*"
                 onChange={e => {
-                  setPhotoFile(e.target.files[0]);
-                  setPhotoPreview(URL.createObjectURL(e.target.files[0]));
+                  setPhotoFile(e.target.files[0])
+                  setPhotoPreview(URL.createObjectURL(e.target.files[0]))
                 }}
               />
 
@@ -293,7 +326,7 @@ export default function Speakers() {
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="px-4 py-2 border rounded-md"
+                  className="px-4 py-2 rounded-md bg-black text-white border border-black hover:bg-slate-800 transition"
                 >
                   Cancel
                 </button>
@@ -311,5 +344,5 @@ export default function Speakers() {
         </div>
       )}
     </div>
-  );
+  )
 }
