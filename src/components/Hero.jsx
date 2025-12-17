@@ -162,6 +162,7 @@ export default function Header({ eventStartISO, eventEndISO, onPrimary, onSecond
               <h2 className="text-2xl md:text-3xl font-bold text-white">
                 The African <span className="text-yellow-300">Sports Industry</span>
               </h2>
+              <h4>Beyond the Game, Build the Economy </h4>
             </div>
 
             <div className="bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-400/50 rounded-xl p-6 mb-6 text-white">
