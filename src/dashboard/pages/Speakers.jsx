@@ -2,22 +2,25 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Pencil, Trash2 } from "lucide-react";
 
-
 import {
   fetchSpeakers,
   createSpeaker,
   updateSpeaker,
   deleteSpeaker,
-  uploadSpeakerPhoto
+  uploadSpeakerPhoto,
+  deleteSpeakerPhoto
 } from "../services/speakers.service";
 
 /*
-  SPEAKERS ADMIN
+  SPEAKERS ADMIN PAGE
+  -------------------
+  Features:
+  - List speakers
+  - Speaker count
   - Add speaker (modal)
   - Edit speaker (modal)
-  - Upload photo
-  - Preview photo
-  - Delete speaker
+  - Delete speaker (with photo cleanup)
+  - Photo upload + preview
 */
 
 const EMPTY_FORM = {
@@ -57,10 +60,10 @@ export default function Speakers() {
     setShowModal(true);
   }
 
-  function openEdit(s) {
-    setEditing(s);
-    setForm(s);
-    setPhotoPreview(s.photo_url || "");
+  function openEdit(speaker) {
+    setEditing(speaker);
+    setForm({ ...speaker });
+    setPhotoPreview(speaker.photo_url || "");
     setPhotoFile(null);
     setShowModal(true);
   }
@@ -86,16 +89,14 @@ export default function Speakers() {
     let photoUrl = form.photo_url;
 
     if (photoFile) {
-  try {
-    photoUrl = await uploadSpeakerPhoto(photoFile);
-  } catch (err) {
-    console.error(err);
-    toast.error(err.message || "Photo upload failed");
-    setLoading(false);
-    return;
-  }
-}
-
+      try {
+        photoUrl = await uploadSpeakerPhoto(photoFile);
+      } catch (err) {
+        toast.error(err.message || "Photo upload failed");
+        setLoading(false);
+        return;
+      }
+    }
 
     const payload = { ...form, photo_url: photoUrl };
 
@@ -112,16 +113,23 @@ export default function Speakers() {
     }
 
     toast.success(editing ? "Speaker updated" : "Speaker added");
-
     closeModal();
     loadSpeakers();
     setLoading(false);
   }
 
-  async function handleDelete(id) {
+  async function handleDelete(speaker) {
     if (!window.confirm("Delete this speaker permanently?")) return;
 
-    const { error } = await deleteSpeaker(id);
+    if (speaker.photo_url) {
+      try {
+        await deleteSpeakerPhoto(speaker.photo_url);
+      } catch (err) {
+        console.warn("Photo cleanup failed", err);
+      }
+    }
+
+    const { error } = await deleteSpeaker(speaker.id);
     if (error) {
       toast.error(error.message);
       return;
@@ -177,29 +185,34 @@ export default function Speakers() {
                 <td className="p-3">{s.speaking_type}</td>
                 <td className="p-3 capitalize">{s.status}</td>
                 <td className="p-3 text-right">
-  <div className="inline-flex items-center gap-3">
-    {/* Edit */}
-    <button
-      onClick={() => openEdit(s)}
-      title="Edit speaker"
-      className="text-amber-600 hover:text-amber-700 transition"
-    >
-      <Pencil size={18} />
-    </button>
+                  <div className="inline-flex items-center gap-3">
+                    <button
+                      onClick={() => openEdit(s)}
+                      title="Edit speaker"
+                      className="text-amber-600 hover:text-amber-700"
+                    >
+                      <Pencil size={18} />
+                    </button>
 
-    {/* Delete */}
-    <button
-      onClick={() => handleDelete(s.id)}
-      title="Delete speaker"
-      className="text-red-600 hover:text-red-700 transition"
-    >
-      <Trash2 size={18} />
-    </button>
-  </div>
-</td>
-
+                    <button
+                      onClick={() => handleDelete(s)}
+                      title="Delete speaker"
+                      className="text-red-600 hover:text-red-700"
+                    >
+                      <Trash2 size={18} />
+                    </button>
+                  </div>
+                </td>
               </tr>
             ))}
+
+            {speakers.length === 0 && (
+              <tr>
+                <td colSpan={5} className="p-6 text-center text-gray-500">
+                  No speakers added yet
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
@@ -259,7 +272,6 @@ export default function Speakers() {
                 className="w-full border rounded-md px-3 py-2 text-slate-900"
               />
 
-              {/* Photo */}
               <input
                 type="file"
                 accept="image/*"
