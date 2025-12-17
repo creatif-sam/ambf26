@@ -31,7 +31,7 @@ export default function Sidebar() {
       <div className="flex items-center justify-between mb-8">
         {!collapsed && (
           <h2 className="text-lg font-extrabold text-amber-400 tracking-wide">
-            AfricaMed
+            AMBF26
           </h2>
         )}
 
