@@ -50,6 +50,10 @@ export default function ConferenceRegistrations() {
   const [search, setSearch] = useState("")
   const [country, setCountry] = useState("")
 
+  /* Pagination state */
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
+
   useEffect(() => {
     load()
   }, [])
@@ -63,6 +67,7 @@ export default function ConferenceRegistrations() {
     return [...new Set(registrations.map(r => r.country).filter(Boolean))].sort()
   }, [registrations])
 
+  /* Filtered data */
   const filtered = useMemo(() => {
     return registrations.filter(r => {
       const matchesSearch =
@@ -74,6 +79,20 @@ export default function ConferenceRegistrations() {
       return matchesSearch && matchesCountry
     })
   }, [registrations, search, country])
+
+  /* Pagination logic */
+  const totalPages = Math.ceil(filtered.length / pageSize)
+
+  const paginatedData = useMemo(() => {
+    const start = (page - 1) * pageSize
+    const end = start + pageSize
+    return filtered.slice(start, end)
+  }, [filtered, page, pageSize])
+
+  /* Reset page when filters change */
+  useEffect(() => {
+    setPage(1)
+  }, [search, country, pageSize])
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -99,6 +118,16 @@ export default function ConferenceRegistrations() {
             ))}
           </select>
 
+          <select
+            value={pageSize}
+            onChange={e => setPageSize(Number(e.target.value))}
+            className="border rounded-md px-3 py-2 text-sm text-slate-900"
+          >
+            <option value={10}>10 / page</option>
+            <option value={20}>20 / page</option>
+            <option value={50}>50 / page</option>
+          </select>
+
           <button
             onClick={() => exportToCSV(filtered)}
             className="ml-auto bg-amber-500 hover:bg-amber-600 text-slate-900 text-sm font-semibold px-4 py-2 rounded-md transition"
@@ -118,7 +147,7 @@ export default function ConferenceRegistrations() {
             </tr>
           </thead>
           <tbody>
-            {filtered.map(r => (
+            {paginatedData.map(r => (
               <tr
                 key={r.id}
                 onClick={() => setSelected(r)}
@@ -135,7 +164,7 @@ export default function ConferenceRegistrations() {
               </tr>
             ))}
 
-            {filtered.length === 0 && (
+            {paginatedData.length === 0 && (
               <tr>
                 <td colSpan={4} className="p-6 text-center text-gray-500">
                   No registrations found
@@ -144,6 +173,33 @@ export default function ConferenceRegistrations() {
             )}
           </tbody>
         </table>
+
+        {/* Pagination controls */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between px-4 py-3 border-t text-sm">
+            <span className="text-gray-600">
+              Page {page} of {totalPages}
+            </span>
+
+            <div className="flex gap-2">
+              <button
+                disabled={page === 1}
+                onClick={() => setPage(p => p - 1)}
+                className="px-3 py-1 border rounded disabled:opacity-40"
+              >
+                Previous
+              </button>
+
+              <button
+                disabled={page === totalPages}
+                onClick={() => setPage(p => p + 1)}
+                className="px-3 py-1 border rounded disabled:opacity-40"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
       </section>
 
       {/* ================= DETAILS ================= */}

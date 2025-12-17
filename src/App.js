@@ -20,6 +20,8 @@ import AdminLayout from "./dashboard/layout/AdminLayout";
 import DashboardOverview from "./dashboard/pages/DashboardOverview";
 import ConferenceRegistrations from "./dashboard/pages/ConferenceRegistrations";
 import ClubMemberships from "./dashboard/pages/ClubMemberships";
+import Speakers from "./dashboard/pages/Speakers"
+
 //import { AdminRoutes } from "./dashboard/routes/AdminRoutes";
 import PaymentValidations from "./dashboard/pages/PaymentValidations";
 import AdminGuard from "./components/AdminGuard";
@@ -118,6 +120,7 @@ export default function AfricaSportsForumWebsite() {
     <Route path="conference" element={<ConferenceRegistrations />} />
     <Route path="club" element={<ClubMemberships />} />
      <Route path="payments" element={<PaymentValidations />} />
+     <Route path="speakers" element={<Speakers />} />
   </Route>
 </Routes>
 

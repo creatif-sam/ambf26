@@ -6,6 +6,7 @@ import {
   CalendarCheck,
   CreditCard,
   ChevronLeft,
+  Mic,
   ChevronRight
 } from "lucide-react"
 
@@ -74,6 +75,17 @@ export default function Sidebar() {
         >
           <CalendarCheck size={20} />
           {!collapsed && <span>Conference Registrations</span>}
+        </NavLink>
+
+
+            <NavLink
+          to="/admin/speakers"
+          className={({ isActive }) =>
+            `${base} ${isActive ? active : inactive}`
+          }
+        >
+          <Mic size={20} />
+          {!collapsed && <span>Speakers</span>}
         </NavLink>
 
         <NavLink

@@ -4,11 +4,14 @@ import AdminLayout from "../layout/AdminLayout";
 import DashboardOverview from "../pages/DashboardOverview";
 import ConferenceRegistrations from "../pages/ConferenceRegistrations";
 import ClubMemberships from "../pages/ClubMemberships";
+ import Speakers from "../pages/Speakers"
 
 export const AdminRoutes = (
   <Route path="/admin" element={<AdminLayout />}>
     <Route index element={<DashboardOverview />} />
     <Route path="conference" element={<ConferenceRegistrations />} />
     <Route path="club" element={<ClubMemberships />} />
+   <Route path="speakers" element={<Speakers />} />
+
   </Route>
 );
