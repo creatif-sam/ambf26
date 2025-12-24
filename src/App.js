@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 
 import AboutUs from "./pages/AboutUs";
 import ClubAfricamed from "./pages/ClubAfricamed";
+import Registration from "./pages/Registration";
 
 import AdminLogin from "./dashboard/pages/AdminLogin";
 import AdminLayout from "./dashboard/layout/AdminLayout";
@@ -93,7 +94,7 @@ export default function AfricaSportsForumWebsite() {
     { id: "about", label: "About" },
     { id: "program", label: "Program" },
     { id: "speakers", label: "Speakers" },
-    { id: "register", label: "Register" },
+    { id: "register", label: "Registration" },
     { id: "club", label: "Club Africamed" },
   
   ];
@@ -109,6 +110,7 @@ export default function AfricaSportsForumWebsite() {
   <Route path="/" element={<Home />} />
   <Route path="/about" element={<AboutUs />} />
   <Route path="/club" element={<ClubAfricamed />} />
+   <Route path="/register" element={<Registration />} />
   <Route path="/admin-login" element={<AdminLogin />} />
 
   {/* Admin routes */}

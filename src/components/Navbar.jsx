@@ -23,6 +23,11 @@ export default function Navbar({
       return
     }
 
+    if (id === "register") {
+      navigate("/register")
+      return
+    }
+
     if (id === "club") {
       navigate("/club")
       return
